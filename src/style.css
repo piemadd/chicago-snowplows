@@ -1,0 +1,31 @@
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111111;
+}
+
+.maplibregl-map {
+  width: 100%;
+  height: 100%;
+}
+
+#settings {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.maplibregl-popup-content {
+  display: flex;
+  flex-direction: column;
+  gap:4px;
+}
+
+.maplibregl-popup-content > * {
+  margin: 0;
+}
+
+.maplibregl-popup-content > ul {
+  padding-inline-start: 16px;
+}
