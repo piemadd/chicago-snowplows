@@ -28,7 +28,7 @@ html, body {
   padding: 8px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   font-size-adjust: 0.5;
 }
 
