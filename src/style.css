@@ -12,8 +12,12 @@ html, body {
 
 #settings {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  background-color: #111;
+  color: #fff;
+  padding: 8px;
 }
 
 .maplibregl-popup-content {

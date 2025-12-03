@@ -150,11 +150,11 @@ map.on('load', async () => {
         ''}
       </ul>
       ` : `
-      <h2>${routesMeta.streets[feature.properties.roadname]}</h2>
+      <h2>${routesMeta.filterValues.streets[feature.properties.roadname]}</h2>
       <ul>
         <li>Plowed at ${feature.properties.lastserviced ? new Date(feature.properties.lastserviced).toLocaleString() : 'Not Logged'}</li>
         <ul><li>${feature.properties.lastserviced ? hoursMinutesSince(feature.properties.timeSinceLastUpdate) : '8+ hours ago'}</li></ul>
-        <li>Priority: ${routesMeta.priorities[feature.properties.routepriority]}</li>
+        <li>Priority: ${routesMeta.filterValues.priorities[feature.properties.routepriority]}</li>
       </ul>
       `
 

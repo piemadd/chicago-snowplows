@@ -1,16 +1,30 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chicago Snowplows</title>
-  </head>
-  <body>
-    <section id="settings">
-      <p>Hello world</p>
-    </section>
-    <div id="map"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chicago Snowplows</title>
+</head>
+
+<body>
+  <!--
+  <section id="settings">
+    <details id="mapFilters" open="true">
+      <summary>Map Filters</summary>
+      <fieldset>
+        <legend>Plow Properties</legend>
+        <label for="vehicle-make-filter">Make:</label>
+        <select name="vehicle-make-filter" id="vehicle-make-filter">
+          <option value="all">All</option>
+        </select>
+      </fieldset>
+    </details>
+  </section>
+  -->
+  <div id="map"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
