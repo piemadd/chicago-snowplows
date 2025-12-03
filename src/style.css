@@ -3,6 +3,7 @@ html, body {
   width: 100%;
   height: 100%;
   background-color: #111111;
+  font-family: "Big Shoulders", sans-serif;
 }
 
 .maplibregl-map {
@@ -10,12 +11,17 @@ html, body {
   height: 100%;
 }
 
+#settings * {
+  margin: 0;
+}
+
 #settings {
   position: absolute;
   border: 1px #fff solid;
   top: 8px;
   left: 8px;
-  right: 48px;
+  max-width: calc(100vw - 72px);
+  max-height: calc(100vh - 16px);
   z-index: 100;
   background-color: #111;
   color: #fff;
@@ -23,12 +29,19 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  font-size-adjust: 0.5;
 }
 
-#settings details {
+#settings > details {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  border: 1px white solid;
+  padding: 8px;
+  font-size-adjust: 0.6;
+}
+
+#settings > details > *:not(:first-child) {
+  margin-top: 4px;
 }
 
 .maplibregl-popup-content {
@@ -37,7 +50,7 @@ html, body {
   gap:4px;
 }
 
-.maplibregl-popup-content > * {
+.maplibregl-popup-content * {
   margin: 0;
 }
 

@@ -187,7 +187,7 @@ map.on('load', async () => {
     if (!thisFilterElement) return;
 
     let thisAdditionalOptions = routesMeta.filterValues[filterKey]
-      .map((option) => `<option value="${option}">${option}</option>`)
+      .map((option, i) => `<option value="${i}">${option}</option>`)
       .join('\n');
 
     thisFilterElement.innerHTML += thisAdditionalOptions;
@@ -215,7 +215,7 @@ document.getElementById('plowFilters').addEventListener('change', (e) => {
 
     if (value == 'all' || !value) return; // we dont need to filter by this
 
-    filterOnValue.push(["==", ["get", filterKey], value.toString()]);
+    filterOnValue.push(["==", ["to-string", ["get", filterKey]], value.toString()]);
   })
 
   map.setFilter('plows', filterOnValue);
@@ -230,8 +230,10 @@ document.getElementById('routeFilters').addEventListener('change', (e) => {
 
     if (value == 'all' || !value) return; // we dont need to filter by this
 
-    filterOnValue.push(["==", ["get", filterKey], value.toString()]);
+    filterOnValue.push(["==", ["to-string", ["get", filterKey]], value.toString()]);
   })
+
+  console.log(filterOnValue)
 
   map.setFilter('plow_routes', filterOnValue);
 });
