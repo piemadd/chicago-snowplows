@@ -3,13 +3,24 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6L6DBECEV4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-6L6DBECEV4');
+  </script>
+  <link rel="icon" href="/images/plow_default.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&display=swap"
     rel="stylesheet">
   <title>Chicago Snowplows</title>
+  <meta name="description"
+    content="Track Chicago Snowplows, see where plows are at on a map, and check street plowing status.">
 </head>
 
 <body>
@@ -78,9 +89,10 @@
       <summary>About</summary>
       <p>This page was created by <a href="https://piemadd.com" target="_blank">Piero Maddaleni</a> using data from the
         <a href="https://plow-tracker-chicago.hub.arcgis.com/apps/43275a4a452e47b9b073fa3e3a10dd3f/explore"
-          target="_blank">Chicago Department of Streets and Sanitation plow map</a>.
+          target="_blank">Chicago Department of Streets and Sanitation plow map</a>. You can use it to track snow plows
+        in Chicago, see where snowplows are at on a map, and street plowing status in the City of Chicago.
       </p>
-
+      <p>Questions? Comments? <a href="mailto:plow@piemadd.com">Email Me</a></p>
     </details>
   </section>
   <div id="map"></div>
