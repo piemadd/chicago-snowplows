@@ -20,6 +20,7 @@ const hoursMinutesSince = (passedTimeInMS) => {
 };
 
 let routesMeta = {};
+let plowsMeta = {};
 
 const map = new maplibregl.Map({
   container: 'map',
@@ -44,13 +45,13 @@ const map = new maplibregl.Map({
         attribution:
           "Map Data &copy; OpenStreetMap Contributors | &copy; Transitstatus | &copy; Protomaps | Plow Data &copy; City of Chicago",
       },
-      plow_routes: {
-        type: 'geojson',
-        data: 'https://store.transitstat.us/chicago_snowplow_routes/shape'
-      },
       plows: {
         type: 'geojson',
         data: 'https://store.transitstat.us/chicago_snowplows/shape'
+      },
+      plow_routes: {
+        type: 'geojson',
+        data: 'https://store.transitstat.us/chicago_snowplow_routes/shape'
       }
     },
     version: 8,
@@ -62,9 +63,11 @@ const map = new maplibregl.Map({
 });
 
 map.on('load', async () => {
-  // loading additional metadata for snow routes
+  // loading additional metadata
   const fetchedRoutesData = await fetch('https://store.transitstat.us/chicago_snowplow_routes/meta').then((res) => res.json());
   routesMeta = fetchedRoutesData;
+  const fetchedPlowsData = await fetch('https://store.transitstat.us/chicago_snowplows/meta').then((res) => res.json());
+  plowsMeta = fetchedPlowsData;
 
   // icon
   const image = await map.loadImage('/images/plow_default.png');
@@ -150,11 +153,11 @@ map.on('load', async () => {
         ''}
       </ul>
       ` : `
-      <h2>${routesMeta.filterValues.streets[feature.properties.roadname]}</h2>
+      <h2>${routesMeta.filterValues.roadname[feature.properties.roadname]}</h2>
       <ul>
         <li>Plowed at ${feature.properties.lastserviced ? new Date(feature.properties.lastserviced).toLocaleString() : 'Not Logged'}</li>
         <ul><li>${feature.properties.lastserviced ? hoursMinutesSince(feature.properties.timeSinceLastUpdate) : '8+ hours ago'}</li></ul>
-        <li>Priority: ${routesMeta.filterValues.priorities[feature.properties.routepriority]}</li>
+        <li>Priority: ${routesMeta.filterValues.routepriority[feature.properties.routepriority]}</li>
       </ul>
       `
 
@@ -166,12 +169,69 @@ map.on('load', async () => {
       .addTo(map);
   });
 
+  // adding data to filters
+  Object.keys(plowsMeta.filterValues).forEach((filterKey) => {
+    const thisFilterElement = document.getElementById(`plow-${filterKey}-filter`);
+
+    if (!thisFilterElement) return;
+
+    let thisAdditionalOptions = plowsMeta.filterValues[filterKey]
+      .map((option) => `<option value="${option}">${option}</option>`)
+      .join('\n');
+
+    thisFilterElement.innerHTML += thisAdditionalOptions;
+  })
+  Object.keys(routesMeta.filterValues).forEach((filterKey) => {
+    const thisFilterElement = document.getElementById(`route-${filterKey}-filter`);
+
+    if (!thisFilterElement) return;
+
+    let thisAdditionalOptions = routesMeta.filterValues[filterKey]
+      .map((option) => `<option value="${option}">${option}</option>`)
+      .join('\n');
+
+    thisFilterElement.innerHTML += thisAdditionalOptions;
+  })
+
   // update frequency
   setInterval(async () => {
     map.getSource('plow_routes').setData('https://store.transitstat.us/chicago_snowplow_routes/shape?t=' + Date.now());
     map.getSource('plows').setData('https://store.transitstat.us/chicago_snowplows/shape?t=' + Date.now());
     const fetchedRoutesData = await fetch('https://store.transitstat.us/chicago_snowplow_routes/meta?t=' + Date.now()).then((res) => res.json());
     routesMeta = fetchedRoutesData;
+    const fetchedPlowsData = await fetch('https://store.transitstat.us/chicago_snowplows/meta?t=' + Date.now()).then((res) => res.json());
+    plowsMeta = fetchedPlowsData;
     console.log('Updated data')
   }, 10000);
+});
+
+// filtering
+document.getElementById('plowFilters').addEventListener('change', (e) => {
+  let filterOnValue = ['all'];
+
+  // getting filter values
+  Object.keys(plowsMeta.filterValues).forEach((filterKey) => {
+    const value = document.getElementById(`plow-${filterKey}-filter`)?.value;
+
+    if (value == 'all' || !value) return; // we dont need to filter by this
+
+    filterOnValue.push(["==", ["get", filterKey], value.toString()]);
+  })
+
+  map.setFilter('plows', filterOnValue);
+});
+
+document.getElementById('routeFilters').addEventListener('change', (e) => {
+  let filterOnValue = ['all'];
+
+  // getting filter values
+  Object.keys(routesMeta.filterValues).forEach((filterKey) => {
+    const value = document.getElementById(`route-${filterKey}-filter`)?.value;
+
+    if (value == 'all' || !value) return; // we dont need to filter by this
+
+    filterOnValue.push(["==", ["get", filterKey], value.toString()]);
+  })
+
+  map.setFilter('plow_routes', filterOnValue);
 });

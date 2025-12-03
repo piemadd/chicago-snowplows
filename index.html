@@ -9,20 +9,61 @@
 </head>
 
 <body>
-  <!--
   <section id="settings">
-    <details id="mapFilters" open="true">
-      <summary>Map Filters</summary>
-      <fieldset>
-        <legend>Plow Properties</legend>
-        <label for="vehicle-make-filter">Make:</label>
-        <select name="vehicle-make-filter" id="vehicle-make-filter">
-          <option value="all">All</option>
+    <details open="true">
+      <summary>Map Settings</summary>
+      <fieldset id="plowFilters">
+        <legend>Plow Filters</legend>
+        <!-- Plow Make -->
+        <label for="plow-make-filter">Make:</label>
+        <select name="plow-make-filter" id="plow-make-filter">
+          <option value="all" selected="selected">All</option>
+        </select>
+        <br/>
+        <!-- Plow Model -->
+        <label for="plow-model-filter">Model:</label>
+        <select name="plow-model-filter" id="plow-model-filter">
+          <option value="all" selected="selected">All</option>
+        </select>
+        <br/>
+        <!-- Plow Model Year -->
+        <label for="plow-modelYear-filter">Model Year:</label>
+        <select name="plow-modelYear-filter" id="plow-modelYear-filter">
+          <option value="all" selected="selected">All</option>
+        </select>
+        <br/>
+        <!-- Plow Engine Manufacturer -->
+        <label for="plow-engineManufacturer-filter">Engine Manufacturer:</label>
+        <select name="plow-engineManufacturer-filter" id="plow-engineManufacturer-filter">
+          <option value="all" selected="selected">All</option>
+        </select>
+        <br/>
+        <!-- Plow Engine Model -->
+        <label for="plow-engineModel-filter">Engine Model:</label>
+        <select name="plow-engineModel-filter" id="plow-engineModel-filter">
+          <option value="all" selected="selected">All</option>
+        </select>
+        <br/>
+        <!-- Plow Engine Cylinders -->
+        <label for="plow-engineCylinders-filter">Engine Cylinders:</label>
+        <select name="plow-engineCylinders-filter" id="plow-engineCylinders-filter">
+          <option value="all" selected="selected">All</option>
+        </select>
+      </fieldset>
+      <fieldset id="routeFilters">
+        <legend>Route Filters</legend>
+        <!-- Route Priority -->
+        <label for="route-routepriority-filter">Route Priority:</label>
+        <select name="route-routepriority-filter" id="route-routepriority-filter">
+          <option value="all" selected="selected">All</option>
         </select>
       </fieldset>
     </details>
+    <details>
+      <summary>About</summary>
+      <p>This page was created by <a href="https://piemadd.com" target="_blank">Piero Maddaleni</a> using data from the <a href="https://plow-tracker-chicago.hub.arcgis.com/apps/43275a4a452e47b9b073fa3e3a10dd3f/explore" target="_blank">Chicago Department of Streets and Sanitation plow map</a></p>
+    </details>
   </section>
-  -->
   <div id="map"></div>
   <script type="module" src="/src/main.js"></script>
 </body>
